@@ -1,3 +1,48 @@
-h1 {
-    color: #888
+* {
+    background-color: black;
+    box-sizing: border-box;
 }
+
+div {
+    text-align: center;
+}
+
+.col-3 {
+    height: 100px;
+    width: 33.333%;
+    margin: .5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    color: white;
+}
+
+#date {
+    height: 320px;
+}
+
+#excel {
+    margin-top: 50px;
+    height: 730px;
+    display: block;
+    border: 13px solid #303030;
+    border-radius: 10px;
+    text-align: left;
+}
+
+#weather {
+    margin-top: 30px;
+    height: 258px;
+}
+
+p.list {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
