@@ -39,6 +39,7 @@ div {
 #weather {
     margin-top: 30px;
     height: 258px;
+    text-align: right;
 }
 
 p.list {

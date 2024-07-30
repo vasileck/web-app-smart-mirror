@@ -5,14 +5,18 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-3" id="date">Date</div>
+    <div class="col-3" id="date"><h1>{{ weather.city }}</h1></div>
     <div class="col-3" id="excel"><p class="list">List<br>
         1.<br>
         2.<br>
         3.<br>
         4.<br>
     </p></div>
-    <div class="col-3" id="weather">Weather</div>
+    <div class="col-3" id="weather">
+        <h1>{{ weather.temperature }}°C</h1>
+        <p class="sun">{{ weather.sunrise }}</p>
+        <p class="sun">{{ weather.sunset }}</p>
+    </div>
 </div>
 </body>
 </html>
