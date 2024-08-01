@@ -1,23 +1,23 @@
 from flask import Flask, render_template
 import requests
+from timeString import timeString
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
 
-    url = 'https://yandex.ru/time/sync.json?geo=1091'
-
-    response = requests.get(url)
-    data = response.json()
+    curTime = timeString.curTime
+    curDay = timeString.getString(timeString.curDay, timeString.curMonth)
 
     weather = {
-        'city': data['clocks']['1091']['name'],
-        'temperature': data['clocks']['1091']['weather']['temp'],
-        'icon': data['clocks']['1091']['weather']['icon'],
-        'sunrise': data['clocks']['1091']['sunrise'],
-        'sunset': data['clocks']['1091']['sunset']
+        'city': timeString.data['clocks']['1091']['name'],
+        'temperature': timeString.data['clocks']['1091']['weather']['temp'],
+        'icon': timeString.data['clocks']['1091']['weather']['icon'],
+        'sunrise': timeString.data['clocks']['1091']['sunrise'],
+        'sunset': timeString.data['clocks']['1091']['sunset'],
+        'time': curTime,
+        'day': curDay
     }
 
     return render_template('index.html', weather=weather)
