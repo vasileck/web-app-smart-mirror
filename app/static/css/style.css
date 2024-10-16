@@ -1,49 +1,90 @@
-* {
-    background-color: black;
-    box-sizing: border-box;
-}
-
-div {
-    text-align: center;
-}
-
-.col-3 {
-    height: 100px;
-    width: 33.333%;
-    margin: .5rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.row {
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
     display: flex;
-    flex-flow: row nowrap;
+    justify-content: center;
     align-items: center;
-    align-content: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
     justify-content: space-between;
-    color: white;
+    width: 80%;
+    max-width: 1200px;
 }
 
-#date {
-    height: 320px;
-}
-
-#excel {
-    margin-top: 50px;
-    height: 730px;
-    display: block;
-    border: 13px solid #303030;
-    border-radius: 10px;
+.left-section {
     text-align: left;
 }
 
-#weather {
-    margin-top: 30px;
-    height: 258px;
+.left-section .city {
+    font-size: 36px;
+    margin: 0;
+}
+
+.left-section .time {
+    font-size: 96px;
+    margin: 10px 0;
+}
+
+.left-section .date {
+    font-size: 24px;
+    margin: 0;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 300px;
+}
+
+.todo-list {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 50px;
+    width: 500px;
+    margin-right: 150px;
+    border: 5px solid;
+    border-image-slice: 5;
+    border-image-source: linear-gradient(to top, black, gray);
+    margin-top: -100px;
+}
+
+.todo-list h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.todo-list ul {
+    list-style-type: circle;
+    padding: 0;
+    padding-left: 30px;
+}
+
+.todo-list ul li {
+    margin: 10px 0;
+    font-size: 20px;
+    
+}
+
+.weather-info {
     text-align: right;
 }
 
-p.list {
-    margin-top: 30px;
-    margin-left: 20px;
+.temp-range {
+    display: grid;
+    justify-content: space-evenly;
+    font-size: 18px;
+    text-align: center;
+}
+
+.current-temp {
+    font-size: 100px;
+    margin: 27px 0;
 }
 
