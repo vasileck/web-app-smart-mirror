@@ -13,14 +13,38 @@
         </div>
     <div class="right-section">
             <div class="todo-list">
-                <h2>Список дел</h2>
-                <ul>
-                    <li>Анжумания</li>
-                    <li>Бегит</li>
-                    <li>Прес качат</li>
-                    <li>Чут чут адихат</li>
-                </ul>
+            <h2>Список покупок:</h2>
+            <ul>
+                {% for purchase in purchases %}
+                    <li>
+                    <div class="item-container">
+                     <input
+                    type="checkbox"
+                    id="checkbox-{{ purchase.id }}"
+                    onclick="toggleStatus({{ purchase.id }})"
+                    {% if purchase.active %} checked {% endif %}
+                    >
+                    <span class="item-text">{{ purchase.item_name }} - Количество: {{ purchase.quantity }}
+                    </span>
 
+
+                    <button class="delete-btn" onclick="deleteItem({{ purchase.id }})">
+                        <img src="{{ url_for('static', filename='images/trash-bin.svg') }}" alt="Удалить">
+                    </button>
+                    </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button class="btn-white btn-animate" id="add-btn" onclick="toggleForm()">Добавить запись</button>
+             <form id="add-form" action="/add" method="POST" style="display: none;">  <!-- Скрываем форму по умолчанию -->
+                <label for="item_name">Название товара:</label>
+                <input type="text" id="item_name" name="item_name" required>
+                </br>
+                <label for="quantity">Количество:</label>
+                <input type="number" id="quantity" name="quantity" required>
+                </br>
+            <input type="submit" value="Добавить">
+            </form>
             </div>
 
             <div class="weather-info">

@@ -61,12 +61,13 @@ body {
 }
 
 .todo-list ul {
-    list-style-type: circle;
+    list-style-type: none;
     padding: 0;
     padding-left: 30px;
 }
 
 .todo-list ul li {
+    display: flex;
     margin: 10px 0;
     font-size: 20px;
     
@@ -88,3 +89,141 @@ body {
     margin: 27px 0;
 }
 
+li span {
+     font-size: 18px; /* Размер текста */
+     transition: color 0.3s, text-decoration 0.3s; /* Анимация для плавного перехода */
+}
+
+#add-btn {
+      padding: 10px 20px;
+      background-color: transparent;
+      border-color: white;
+      border-radius: 15px;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 20px; /* Отступ снизу */
+      margin-left: 185px;
+      transition: all .2s;
+}
+
+#add-btn:hover {
+   background-color:  #999;
+   transform: translateY(-3px);
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#add-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+#add-btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+
+ input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            appearance: none; /* Убираем стандартный стиль чекбокса */
+            cursor: pointer;
+            margin-right: 15px;
+ }
+input[type="checkbox"]:checked {
+    background-color: white; /* Цвет при отмеченном статусе */
+    border-color: white;
+}
+
+input[type="checkbox"]:checked:before {
+    content: '✔';
+    display: block;
+    text-align: center;
+    color: black;
+    font-size: 14px;
+}
+
+input[type="checkbox"]:checked + span {
+     text-decoration: line-through; /* Перечеркиваем текст */
+     color: #999; /* Делаем текст серым и менее заметным */
+}
+
+input[type="checkbox"]:not(:checked) + span {
+      text-decoration: none;
+      color: white;
+}
+
+input[type='submit']:not(:checked)  {
+    background-color: transparent;
+    border-color: white;
+    border-radius: 15px;
+    color: white;
+    margin-top: 10px;
+    padding: 5px 10px;
+    transition: all .2s;
+    cursor: pointer;
+}
+
+input[type='submit']:hover {
+   background-color:  #999;
+   transform: translateY(-3px);
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+input[type='submit']:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+input[type='submit']::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.delete-btn {
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   padding: 0px;
+}
+
+.delete-btn img {
+    width: 24px;  /* Задаем размер иконки */
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.delete-btn:hover img {
+     opacity: 0.7;
+     filter: brightness(0) invert(0.6);
+}
+
+.item-container {
+    display: flex;
+    justify-content: space-between; /* Делаем выравнивание для чекбоксов и текста */
+    width: 100%;
+}
+
+.item-text {
+   flex-grow: 1; /* Делаем текст гибким, чтобы кнопки были в одном столбце */
+}
