@@ -13,8 +13,12 @@
         </div>
     <div class="right-section">
             <div class="todo-list">
-            <h2>Список покупок:</h2>
-            <ul>
+             <div class="tabs">
+            <div class="tab active" onclick="openTab('list1')">Список покупок</div>
+            <div class="tab" onclick="openTab('list2')">Список дел</div>
+            </div>
+            <div id="list1" class="tab-content active">
+                <ul>
                 {% for purchase in purchases %}
                     <li>
                     <div class="item-container">
@@ -35,6 +39,26 @@
                     </li>
                 {% endfor %}
             </ul>
+            </div>
+              <div id="list2" class="tab-content">
+                <ul>
+                {% for task in todolist %}
+                <li>
+                    <input
+                    type="checkbox"
+                    id="checkbox-{{ task.id }}"
+                    onclick="toggleStatustodo({{ task.id }})"
+                    {% if task.is_completed %} checked {% endif %}
+                    >
+                    <span class="item-text">{{ task.task_name }}</span>
+                 <button class="delete-btn" onclick="deleteItemtodo({{ task.id }})">
+                        <img src="{{ url_for('static', filename='images/trash-bin.svg') }}" alt="Удалить">
+                 </button>
+                </li>
+                {% endfor %}
+                </ul>
+               </div>
+
             <button class="btn-white btn-animate" id="add-btn" onclick="toggleForm()">Добавить запись</button>
              <form id="add-form" action="/add" method="POST" style="display: none;">  <!-- Скрываем форму по умолчанию -->
                 <label for="item_name">Название товара:</label>

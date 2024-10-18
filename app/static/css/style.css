@@ -227,3 +227,31 @@ input[type='submit']::after {
 .item-text {
    flex-grow: 1; /* Делаем текст гибким, чтобы кнопки были в одном столбце */
 }
+
+.tabs {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: large;
+}
+
+.tab {
+   padding: 10px 20px;
+   background-color: transparent;
+   margin-right: 5px;
+}
+
+.tab.active {
+     background-color: transparent;
+     border-left: 1px solid #e4e2df;
+     font-weight: bold;
+}
+
+.tab-content {
+     display: none;
+     padding: 20px;
+}
+
+.tab-content.active {
+     display: block;
+}

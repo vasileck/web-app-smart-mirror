@@ -21,15 +21,23 @@ class Purchases(db.Model):
     def __repr__(self):
         return f"<Purchases {self.item_name}>"
 
+class ToDoList(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    task_name = db.Column(db.String(255), nullable=False)
+    is_completed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f"<ToDoList {self.task_name}>"
+
 @app.route('/')
 def index():
     purchases = Purchases.query.all()
-    show_form = False
+    todolist = ToDoList.query.all()
     weather = {
         'city': timeString.data['clocks']['1091']['name'],
         'temperature': timeString.data['clocks']['1091']['weather']['temp']
     }
-    return render_template('index.html', weather=weather, purchases=purchases, show_form=show_form)
+    return render_template('index.html', weather=weather, purchases=purchases, todolist=todolist)
 
 
 @app.route('/get_temperature')
@@ -54,6 +62,14 @@ def update_status(id):
     # Возвращаем ответ с текущим статусом
     return jsonify({'active': purchase.active})
 
+#Апдейт статуса для списка дел
+@app.route('/updatetodo/<int:id>', methods=['POST'])
+def update_statustodo(id):
+    task = ToDoList.query.get_or_404(id)
+    task.is_completed = not task.is_completed
+    db.session.commit()
+    return jsonify({'is_completed': task.is_completed})
+
 
 @app.route('/add', methods=['POST'])
 def add_item():
@@ -73,6 +89,20 @@ def add_item():
 def delete_item(id):
     # Получаем запись по её ID
     item_to_delete = Purchases.query.get_or_404(id)
+
+    try:
+        # Удаляем запись из базы данных
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return jsonify({'success': True})
+    except:
+        db.session.rollback()
+        return jsonify({'success': False}), 500
+
+@app.route('/deletetodo/<int:id>', methods=['POST'])
+def delete_itemtodo(id):
+    # Получаем запись по её ID
+    item_to_delete = ToDoList.query.get_or_404(id)
 
     try:
         # Удаляем запись из базы данных
