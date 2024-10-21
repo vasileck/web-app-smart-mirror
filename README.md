@@ -23,10 +23,10 @@
 ## Установка
 Клонируйте репозиторий:
 
-`bash
+```bash
 
 git clone https://github.com/username/smart-mirror.git
-cd smart-mirror`
+cd smart-mirror```
 
 Запустите сервер.
 
