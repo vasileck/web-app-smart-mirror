@@ -21,12 +21,7 @@
 **MySQL**: для хранения данных о списках дел и покупок.
 
 ## Установка
-Клонируйте репозиторий:
-
-```bash
-
-git clone https://github.com/username/smart-mirror.git
-cd smart-mirror```
+Клонируйте репозиторий.
 
 Запустите сервер.
 
