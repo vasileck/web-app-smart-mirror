@@ -33,7 +33,7 @@ class ToDoList(db.Model):
     def __repr__(self):
         return f"<ToDoList {self.task_name}>"
 
-#Основная страница, где отображается город, время и погода
+#Основная страница
 @app.route('/')
 def index():
     purchases = Purchases.query.all()
@@ -47,7 +47,7 @@ def index():
 #Обновление температуры
 @app.route('/get_temperature')
 def get_temperature():
-    url = os.getenv('WEATHER_URL')
+    url = 'https://yandex.ru/time/sync.json?geo=1091'
 
     response = requests.get(url)
     data = response.json()
