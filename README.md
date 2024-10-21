@@ -45,7 +45,7 @@
 Чтобы сменить город, нужно подставить код своего города в ссылку https://yandex.ru/time/sync.json?geo=1091, в параметр geo.
 Узнать код города можно через поисковую строку Яндекс, вбив в поиск запрос Погода.  
 
-![Описание изображения]([URL_изображения](https://github.com/vasileck/web-app-smart-mirror/blob/main/beEVeASA9YM.jpg))
+![Описание изображения](https://github.com/vasileck/web-app-smart-mirror/blob/main/beEVeASA9YM.jpg)
 
 ## Вклад
 Если вы хотите внести свой вклад, пожалуйста, откройте вопрос или создайте запрос на перенос (pull request).
