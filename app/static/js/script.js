@@ -1,3 +1,4 @@
+// функция времени
 function updateTime() {
         const now = new Date();
 
@@ -10,9 +11,7 @@ function updateTime() {
             document.getElementById('user-date').innerText = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
     }
 
-    // Обновляем время каждую секунду
-    setInterval(updateTime, 1000);
-
+// функция температуры
 function updateTemperature() {
     fetch('/get_temperature')
         .then(response => response.json())
@@ -23,27 +22,11 @@ function updateTemperature() {
         .catch(error => console.error('Error fetching temperature:', error));
 }
 
-// Обновляем время каждую секунду
 setInterval(updateTime, 1000);
 
-// Обновляем время и температуру при загрузке страницы
-
-
-// Обновляем температуру каждые 30 минут
 setInterval(updateTemperature, 1800000);
 
-function toggleForm() {
-            const form = document.getElementById('add-form');
-            text = document.getElementById('add-btn');
-            if (form.style.display === 'none' || form.style.display === '') {
-                form.style.display = 'block';  // Показываем форму
-                document.getElementById('add-btn').innerText = 'Закрыть форму'
-            } else {
-                form.style.display = 'none';  // Скрываем форму
-                document.getElementById('add-btn').innerText = 'Добавить запись';
-            }
-}
-
+// изменить статус чекбокса в списке покупок
 function toggleStatus(purchaseId) {
             fetch(`/update/${purchaseId}`, {
                 method: 'POST'
@@ -65,6 +48,7 @@ function toggleStatus(purchaseId) {
             });
 }
 
+// изменить статус чекбокса в списке дел
 function toggleStatustodo(taskId) {
             fetch(`/updatetodo/${taskId}`, {
                 method: 'POST'
@@ -86,6 +70,7 @@ function toggleStatustodo(taskId) {
             });
 }
 
+// удалить в списке покупок
 function deleteItem(purchaseId) {
             fetch(`/delete/${purchaseId}`, {
                 method: 'POST'
@@ -102,6 +87,7 @@ function deleteItem(purchaseId) {
             .catch(error => console.error('Ошибка удаления:', error));
 }
 
+// удалить в списке дел
 function deleteItemtodo(taskId) {
             fetch(`/deletetodo/${taskId}`, {
                 method: 'POST'
@@ -118,6 +104,7 @@ function deleteItemtodo(taskId) {
             .catch(error => console.error('Ошибка удаления:', error));
 }
 
+// переключение между вкладками
 function openTab(tabId) {
             // Скрываем все табы
             var contents = document.querySelectorAll('.tab-content');

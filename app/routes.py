@@ -1,17 +1,20 @@
-from flask import Flask, render_template, jsonify, redirect, request
+from flask import Flask, render_template, jsonify
 from timeString import timeString
 import requests
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+import os
 
-
+load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://u1634956_nastya:Nastya1_Nastya2@smart-tech.su/u1634956_nastya'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+#Таблица списка покупок
 class Purchases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_name = db.Column(db.String(255), nullable=False)
@@ -21,6 +24,7 @@ class Purchases(db.Model):
     def __repr__(self):
         return f"<Purchases {self.item_name}>"
 
+#Таблица списка дел
 class ToDoList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task_name = db.Column(db.String(255), nullable=False)
@@ -29,6 +33,7 @@ class ToDoList(db.Model):
     def __repr__(self):
         return f"<ToDoList {self.task_name}>"
 
+#Основная страница
 @app.route('/')
 def index():
     purchases = Purchases.query.all()
@@ -39,7 +44,7 @@ def index():
     }
     return render_template('index.html', weather=weather, purchases=purchases, todolist=todolist)
 
-
+#Обновление температуры
 @app.route('/get_temperature')
 def get_temperature():
     url = 'https://yandex.ru/time/sync.json?geo=1091'
@@ -49,17 +54,13 @@ def get_temperature():
     temperature = data['clocks']['1091']['weather']['temp']
     return jsonify({'temp': temperature})
 
-
+#Апдейт статуса для списка покупок
 @app.route('/update/<int:id>', methods=['POST'])
 def update_status(id):
-    # Найдем продукт по его id
     purchase = Purchases.query.get_or_404(id)
-    # Изменим статус active на противоположный
     purchase.active = not purchase.active
-    # Сохраним изменения в базе данных
     db.session.commit()
 
-    # Возвращаем ответ с текущим статусом
     return jsonify({'active': purchase.active})
 
 #Апдейт статуса для списка дел
@@ -70,28 +71,12 @@ def update_statustodo(id):
     db.session.commit()
     return jsonify({'is_completed': task.is_completed})
 
-
-@app.route('/add', methods=['POST'])
-def add_item():
-    item_name = request.form['item_name']
-    quantity = request.form['quantity']
-
-    # Создаем новую запись
-    new_item = Purchases(item_name=item_name, quantity=quantity)
-
-    # Добавляем в базу данных
-    db.session.add(new_item)
-    db.session.commit()
-
-    return redirect('/')
-
+#Удалить в списке покупок
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete_item(id):
-    # Получаем запись по её ID
     item_to_delete = Purchases.query.get_or_404(id)
 
     try:
-        # Удаляем запись из базы данных
         db.session.delete(item_to_delete)
         db.session.commit()
         return jsonify({'success': True})
@@ -99,6 +84,7 @@ def delete_item(id):
         db.session.rollback()
         return jsonify({'success': False}), 500
 
+#Удалить в списке дел
 @app.route('/deletetodo/<int:id>', methods=['POST'])
 def delete_itemtodo(id):
     # Получаем запись по её ID
