@@ -1,6 +1,10 @@
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 class timeString:
-    url = 'https://yandex.ru/time/sync.json?geo=1091'
+    url = os.getenv('WEATHER_URL')
 
 
     response = requests.get(url)
