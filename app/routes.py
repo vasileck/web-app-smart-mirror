@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify
-from timeString import timeString
 import requests
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
@@ -38,9 +37,15 @@ class ToDoList(db.Model):
 def index():
     purchases = Purchases.query.all()
     todolist = ToDoList.query.all()
+
+    url = 'https://yandex.ru/time/sync.json?geo=1091'
+
+    response = requests.get(url)
+    data = response.json()
+
     weather = {
-        'city': timeString.data['clocks']['1091']['name'],
-        'temperature': timeString.data['clocks']['1091']['weather']['temp']
+        'city': data['clocks']['1091']['name'],
+        'temperature': data['clocks']['1091']['weather']['temp']
     }
     return render_template('index.html', weather=weather, purchases=purchases, todolist=todolist)
 
